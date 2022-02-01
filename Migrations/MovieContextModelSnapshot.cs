@@ -15,15 +15,65 @@ namespace mission4.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.22");
 
+            modelBuilder.Entity("mission4.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryType")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryID = 1,
+                            CategoryType = "Romance/Fantasy"
+                        },
+                        new
+                        {
+                            CategoryID = 2,
+                            CategoryType = "Comedy/Adventure"
+                        },
+                        new
+                        {
+                            CategoryID = 3,
+                            CategoryType = "Rom-com"
+                        },
+                        new
+                        {
+                            CategoryID = 4,
+                            CategoryType = "Horror"
+                        },
+                        new
+                        {
+                            CategoryID = 5,
+                            CategoryType = "Action"
+                        },
+                        new
+                        {
+                            CategoryID = 6,
+                            CategoryType = "Mystery"
+                        },
+                        new
+                        {
+                            CategoryID = 7,
+                            CategoryType = "Drama"
+                        });
+                });
+
             modelBuilder.Entity("mission4.Models.MovieResponse", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -48,13 +98,15 @@ namespace mission4.Migrations
 
                     b.HasKey("MovieId");
 
+                    b.HasIndex("CategoryID");
+
                     b.ToTable("responses");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
-                            Category = "Romance/Fantasy",
+                            CategoryID = 1,
                             Director = "Richard Curtis",
                             Edited = true,
                             Notes = "Live your life",
@@ -65,7 +117,7 @@ namespace mission4.Migrations
                         new
                         {
                             MovieId = 2,
-                            Category = "Adventure",
+                            CategoryID = 2,
                             Director = "Ben Stiller",
                             Edited = true,
                             Notes = "Start Living",
@@ -76,7 +128,7 @@ namespace mission4.Migrations
                         new
                         {
                             MovieId = 3,
-                            Category = "Comedy/Romance",
+                            CategoryID = 3,
                             Director = "Christian Ditter",
                             Edited = false,
                             Notes = "Fight for Love",
@@ -84,6 +136,15 @@ namespace mission4.Migrations
                             Title = "Love, Rosie",
                             Year = 2014
                         });
+                });
+
+            modelBuilder.Entity("mission4.Models.MovieResponse", b =>
+                {
+                    b.HasOne("mission4.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

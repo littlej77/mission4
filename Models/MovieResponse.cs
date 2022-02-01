@@ -13,8 +13,6 @@ namespace mission4.Models
         public int MovieId { get; set; }
 
         [Required]
-        public string Category { get; set; }
-        [Required]
         public string Title { get; set; }
         [Required]
         public int Year { get; set; }
@@ -23,11 +21,16 @@ namespace mission4.Models
         [Required]
         public string Rating { get; set; }
         public bool Edited { get; set; }
-        //[Range(0,25)]
+
         public string Notes { get; set; }
+
+        [Required] //making the FK relationship
+        public int CategoryID { get; set; }
+        public Category Category { get; set; }
 
         //Rating (dropdown menu (G, PG, PG-13, R)
         //    Edited (Boolean) = bool
         //    Notes ( max 25 char)
+
     }
 }

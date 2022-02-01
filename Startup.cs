@@ -57,6 +57,7 @@ namespace mission4
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                // see the movietable.cshtml (the display of the movies) its calling categoryid so id
             });
         }
     }

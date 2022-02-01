@@ -7,8 +7,15 @@
 
 <div>
     <form method="post">
-        <label asp-for="Category">Category:</label>
-        <input asp-for="Category" /><br />
+
+        <label asp-for="CategoryID">Category:</label>
+        <select asp-for="CategoryID">
+            <option value="">Select a Category</option>
+            @foreach (Category m in ViewBag.Categories)
+            {
+                <option value="@m.CategoryID">@m.CategoryType</option>
+            }
+        </select> <br />
 
         <label>Title:</label>
         <input asp-for="Title" /><br />

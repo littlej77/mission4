@@ -15,15 +15,30 @@ namespace mission4.Models
         }
 
         public DbSet<MovieResponse> responses { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
+
+            mb.Entity<Category>().HasData(
+                new Category { CategoryID = 1, CategoryType = "Romance/Fantasy" },
+                new Category { CategoryID = 2, CategoryType = "Comedy/Adventure" },
+                new Category { CategoryID = 3, CategoryType = "Rom-com" },
+                new Category { CategoryID = 4, CategoryType = "Horror" },
+                new Category { CategoryID = 5, CategoryType = "Action" },
+                new Category { CategoryID = 6, CategoryType = "Mystery" },
+                new Category { CategoryID = 7, CategoryType = "Drama" }
+            );
+
+
+
+
             mb.Entity<MovieResponse>().HasData(
 
                 new MovieResponse
                 {
                     MovieId=1,
-                    Category="Romance/Fantasy",
+                    CategoryID =1,
                     Title="About Time",
                     Year= 2013,
                     Director="Richard Curtis",
@@ -34,7 +49,7 @@ namespace mission4.Models
                 new MovieResponse
                 {
                     MovieId=2,
-                    Category = "Adventure",
+                    CategoryID = 2,
                     Title = "The Secret Life of Walter Mitty",
                     Year = 2013,
                     Director = "Ben Stiller",
@@ -45,7 +60,7 @@ namespace mission4.Models
                 new MovieResponse
                 {
                     MovieId=3,
-                    Category = "Comedy/Romance",
+                    CategoryID = 3,
                     Title = "Love, Rosie",
                     Year = 2014,
                     Director = "Christian Ditter",
